@@ -1,0 +1,156 @@
+/* Écran mural : lu à plusieurs mètres, donc typographie très large et peu de texte.
+   Les tailles sont en clamp() pour s'adapter d'un écran de couloir à un téléviseur. */
+
+.affichage {
+  min-height: 100vh;
+  background: var(--couleur-fond);
+  color: var(--couleur-texte);
+  padding: clamp(1.5rem, 3vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.affichage-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  background: var(--degrade-marque);
+  color: #ffffff;
+  border-radius: var(--rayon-bordure);
+  padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.affichage-entete h1 {
+  font-family: var(--police-marque);
+  font-size: clamp(1.8rem, 3.6vw, 3.4rem);
+  line-height: 1.1;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.affichage-date {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1rem, 1.7vw, 1.6rem);
+  opacity: 0.92;
+}
+
+.affichage-horloge {
+  font-family: var(--police-marque);
+  font-size: clamp(2.6rem, 6vw, 6rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.affichage-grille {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.affichage-salle {
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-left: 10px solid var(--couleur-valide);
+  border-radius: var(--rayon-bordure);
+  box-shadow: var(--ombre-carte);
+  padding: clamp(1.1rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Le bandeau latéral porte l'information « libre / occupée » : lisible de loin,
+   même sans lire le texte. */
+.affichage-salle.occupee {
+  border-left-color: var(--couleur-rejete);
+}
+
+.affichage-salle-entete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.affichage-salle h2 {
+  font-family: var(--police-marque);
+  font-size: clamp(1.4rem, 2.4vw, 2.4rem);
+  margin: 0;
+}
+
+.affichage-etat {
+  font-size: clamp(0.9rem, 1.3vw, 1.3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--couleur-valide-fond);
+  color: var(--couleur-valide);
+  white-space: nowrap;
+}
+
+.affichage-salle.occupee .affichage-etat {
+  background: var(--couleur-rejete-fond);
+  color: var(--couleur-rejete);
+}
+
+.affichage-capacite {
+  margin: 0;
+  color: var(--couleur-texte-attenue);
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+}
+
+.affichage-creneaux {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.affichage-creneaux li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: var(--couleur-annule-fond);
+  font-size: clamp(1rem, 1.6vw, 1.7rem);
+}
+
+.affichage-creneaux li.creneau-actuel {
+  background: var(--couleur-info-fond);
+  color: var(--couleur-info-texte);
+  font-weight: 700;
+}
+
+.creneau-heures {
+  font-variant-numeric: tabular-nums;
+}
+
+.creneau-ong {
+  font-family: var(--police-marque);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.affichage-vide,
+.affichage-message {
+  color: var(--couleur-texte-attenue);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  margin: 0;
+}
+
+.affichage-pied {
+  text-align: center;
+  color: var(--couleur-texte-attenue);
+  font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+}

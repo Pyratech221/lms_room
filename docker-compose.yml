@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-reservation_salles}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      # Les données survivent à `docker compose down` (mais pas à `down -v`).
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-reservation_salles}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    build: ./backend
+    # Secrets applicatifs (Microsoft Graph, SECRET_KEY…) repris du fichier existant.
+    env_file:
+      - ./backend/.env
+    environment:
+      # Ces valeurs priment sur celles du env_file : dans le réseau Docker, la base
+      # s'appelle « db » et non « localhost ».
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-reservation_salles}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DEBUG: "False"
+      # Le backend n'est jamais joint directement : les requêtes arrivent via nginx,
+      # qui transmet l'en-tête Host d'origine.
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend
+      CSRF_TRUSTED_ORIGINS: ${APP_URL:-http://localhost:8080}
+      CORS_ALLOWED_ORIGINS: ${APP_URL:-http://localhost:8080}
+      FRONTEND_URL: ${APP_URL:-http://localhost:8080}
+      # Même origine pour le front et l'API : pas besoin de cookies cross-site.
+      COOKIE_SAMESITE: Lax
+      COOKIE_SECURE: "False"
+    depends_on:
+      db:
+        condition: service_healthy
+    # Aucun port publié : seul nginx parle au backend, via le réseau interne.
+    expose:
+      - "8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "${APP_PORT:-8080}:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

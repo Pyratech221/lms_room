@@ -1,0 +1,229 @@
+/* ================================
+   MES RÉSERVATIONS — vue hebdomadaire par salle
+   (partage la coquille .dashboard-layout / .dashboard-main de Dashboard.css)
+   ================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.92;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  border-radius: 10px;
+}
+
+.btn-success {
+  background-color: var(--couleur-valide);
+  color: white;
+  flex: 1;
+}
+
+.btn-danger {
+  background-color: var(--couleur-rejete);
+  color: white;
+  flex: 1;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Grid de Salles */
+.salles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .salles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Carte Salle */
+.salle-card {
+  background: var(--couleur-fond-carte);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: var(--ombre-carte);
+  transition: box-shadow 0.2s ease;
+}
+
+.salle-card:hover {
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.09);
+}
+
+/* Header Salle */
+.salle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.salle-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--couleur-texte);
+}
+
+.badge {
+  background-color: var(--couleur-accent);
+  color: var(--couleur-sur-accent);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Équipements */
+.equipements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.85rem;
+  background: var(--couleur-fond);
+  border-radius: 16px;
+}
+
+.equipment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.83rem;
+  color: var(--couleur-texte-attenue);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.equipment-badge:hover {
+  border-color: var(--couleur-texte);
+  color: var(--couleur-texte);
+}
+
+/* Réservations List */
+.reservations-list h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--couleur-texte);
+  margin: 0 0 1rem 0;
+}
+
+.jour-section {
+  margin-bottom: 1.1rem;
+}
+
+.jour-titre {
+  font-weight: 600;
+  color: var(--couleur-texte-attenue);
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+/* Réservations */
+.reservations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reservation-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--couleur-fond);
+  border-radius: 14px;
+  font-size: 0.88rem;
+}
+
+.reservation-item.statut-valide {
+  background: var(--couleur-valide-fond);
+}
+
+.reservation-item.statut-en_attente {
+  background: var(--couleur-en-attente-fond);
+}
+
+.reservation-item.statut-rejete {
+  background: var(--couleur-rejete-fond);
+  opacity: 0.75;
+}
+
+.resa-time {
+  font-weight: 700;
+  color: var(--couleur-texte);
+  min-width: 76px;
+}
+
+.resa-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.resa-info strong {
+  color: var(--couleur-texte);
+  font-weight: 600;
+}
+
+.resa-info em {
+  color: var(--couleur-texte-attenue);
+  font-style: normal;
+  font-size: 0.82rem;
+}
+
+.resa-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+/* Slot vide */
+.empty-slot {
+  padding: 0.7rem;
+  text-align: center;
+  color: var(--couleur-texte-attenue);
+  font-size: 0.88rem;
+  background: var(--couleur-fond);
+  border-radius: 14px;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .reservation-item {
+    flex-wrap: wrap;
+  }
+
+  .resa-actions {
+    width: 100%;
+  }
+}

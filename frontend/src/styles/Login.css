@@ -1,0 +1,115 @@
+.page-connexion {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--couleur-fond);
+}
+
+.carte-connexion {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 24px;
+  box-shadow: var(--ombre-carte);
+  padding: 2.25rem 2rem 1.75rem;
+  overflow: hidden;
+}
+
+/* Le code est la seule chose à saisir à cette étape : il porte donc tout le poids
+   visuel, chiffres larges et espacés pour qu'une faute de frappe se voie. */
+.saisie-code {
+  text-align: center;
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.4em;
+  /* L'interlettrage ajoute un blanc après le dernier chiffre : on le compense pour que
+     la suite reste optiquement centrée. */
+  text-indent: 0.4em;
+}
+
+/* Sortie de secours sous le bouton principal : utile, mais elle ne doit pas rivaliser
+   avec l'action attendue. */
+.lien-discret {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--couleur-texte-attenue);
+  font: inherit;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lien-discret:hover {
+  color: var(--couleur-texte);
+}
+
+/* Liseré bleu → vert, repris du dégradé du logo Wetlands. */
+.carte-connexion::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: var(--degrade-marque);
+}
+
+.connexion-marque {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.connexion-embleme {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--couleur-accent);
+  color: var(--couleur-sur-accent);
+}
+
+.connexion-nom {
+  margin: 0;
+  font-family: var(--police-marque);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--couleur-texte);
+}
+
+.connexion-titre {
+  margin: 0 0 0.35rem;
+  font-size: 1.6rem;
+}
+
+/* Bandeau des logos : toujours sur fond blanc, y compris en mode sombre.
+   Les fichiers fournis ne sont lisibles que sur fond clair (texte noir de BirdLife,
+   fond blanc de RAMPAO). */
+.connexion-partenaires {
+  margin-top: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+/* La hauteur de chaque logo est fixée individuellement dans Login.jsx (équilibre optique). */
+.connexion-partenaires img {
+  display: block;
+  width: auto;
+}

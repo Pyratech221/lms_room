@@ -1,0 +1,13 @@
+# Secrets : ne doivent jamais être copiés dans l'image (ils sont injectés à l'exécution).
+.env
+.env.*
+!.env.example
+
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+staticfiles/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
